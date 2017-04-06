@@ -1,0 +1,21 @@
+server:
+  port: 8081
+  context-path: /test
+
+# 使用h2内存数据库
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+#   第一种方式：直接使用jpa建表，没有类似flyway等初始化数据库
+#    url: jdbc:h2:file:~/.h2/quickstart;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
+#    username: sa
+#    password: 
+#   第二种方式：初始化数据库（此时各个数据库语法等不通时，需自行转换成h2支持的格式）
+    url: jdbc:h2:mem:mockitotest;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'classpath:db/db_init.sql'
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  thymeleaf:
+    cache: false
